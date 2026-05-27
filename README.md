@@ -186,3 +186,20 @@ Un `<<Database Server>>` independiente aloja la base de datos `DB_Tunomatico`. L
 Representa la infraestructura de terceros. El sistema se comunica exclusivamente con la `<<ExternalSystem>> API Externa` mediante peticiones **HTTPS** originadas desde el `NotificadorAdapter`. El uso de HTTPS en esta comunicación responde a una exigencia de seguridad para el transporte de datos de usuarios (correos, tokens de notificación). El bajo acoplamiento garantizado por el Adapter implica que este nodo externo puede ser sustituido sin modificar la arquitectura interna del sistema.
 
 ---
+
+## 🧩 Reflexiones Finales del Modelado
+
+Este ejercicio de modelado arquitectónico refleja una aproximación profesional e integral al diseño de software, donde cada decisión fue tomada con fundamento técnico y no como elemento decorativo del diagrama:
+
+- **Cada patrón resolvió un problema concreto y específico**: el Singleton garantizó la unicidad del estado compartido; el Prototype optimizó la creación de objetos repetitivos de alta frecuencia; el Adapter desacopló el dominio de las dependencias externas volátiles.
+- **La trazabilidad entre capas fue mantenida en todo momento**: la transición desde el caso de uso ➡ diagrama de clases ➡ diagrama de implementación permite seguir cada decisión funcional hasta su expresión física en nodos y componentes reales.
+- **La separación de responsabilidades fue el principio rector del diseño**, manifestándose en la división entre nodos cliente, servidor de negocio, servidor de base de datos y proveedor externo, cada uno con un rol claro y bien definido.
+- **La modularidad y el bajo acoplamiento diseñados en la vista lógica se verifican en la vista física**, confirmando que el modelado no es un ejercicio aislado, sino una guía real para la implementación.
+
+Este repositorio tiene como propósito servir de referencia formal para el modelado arquitectónico de sistemas de información, demostrando los estándares exigidos en entornos de ingeniería de software profesional.
+
+---
+
+> ⚠️ **Nota**
+> Este repositorio es exclusivamente documental.
+> No se incluye código fuente, ya que el foco del trabajo es el modelado arquitectónico UML y la justificación técnica de las decisiones de diseño.
