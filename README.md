@@ -28,7 +28,7 @@ El sistema considera los aspectos operacionales críticos de un entorno de atenc
 
 ## 🔹 1. Diagrama de Casos de Uso UML
 
-![Diagrama de Casos de Uso](Diagramas/Caso_de_uso.png)
+![Diagrama de Casos de Uso](Diagramas/Caso_de_uso_bien.png)
 
 ### Descripción General
 
@@ -89,7 +89,7 @@ Las relaciones `<<extend>>` se emplearon para representar comportamientos **opci
 
 ## 🔹 2. Diagrama de Clases UML con Patrones Aplicados
 
-![Diagrama de clases](Diagramas/diagrama_de_clases.png)
+![Diagrama de clases](Diagramas/diagrama_de_clases_bien.png)
 
 ### 🧩 Justificación Arquitectónica y Patrones Aplicados
 
@@ -144,7 +144,7 @@ Se implementó el patrón Adapter en dos niveles. Primero, se definió la interf
 
 ## 🔹 3. Diagrama de Implementación UML
 
-![Diagrama de implementacion](Diagramas/diagrama_de_implementacion.png)
+![Diagrama de implementacion](Diagramas/diagrama_de_implementacion_bien.png)
 
 ### Despliegue Físico y Decisiones Técnicas
 
