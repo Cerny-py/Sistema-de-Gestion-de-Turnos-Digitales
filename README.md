@@ -141,3 +141,48 @@ Se implementó el patrón Adapter en dos niveles. Primero, se definió la interf
 - Permitir la sustitución o adición de proveedores externos sin impacto en el núcleo del sistema.
 
 ---
+
+## 🔹 3. Diagrama de Implementación UML
+
+![Diagrama de implementacion](Diagramas/diagrama_de_implementacion.png)
+
+### Despliegue Físico y Decisiones Técnicas
+
+El diagrama de implementación ilustra la arquitectura física del sistema Tunomático, estructurada bajo un modelo distribuido de **Cliente–Servidor**. Esta topología garantiza la alta disponibilidad, la centralización de la lógica de negocio y la materialización física de los patrones de diseño definidos en la vista lógica.
+
+---
+
+#### Nodos Cliente — Capa de Presentación
+
+Se han definido cuatro dispositivos físicos de interacción que representan los puntos de entrada al sistema:
+
+- **Tótem Presencial** (`<<Device>>`): Dispositivo ubicado en la sucursal que ejecuta el artefacto `AppCliente`. Se comunica con el servidor central mediante **TCP/IP** para garantizar baja latencia en la emisión de turnos.
+- **Terminal Operador** (`<<Device>>`): Estación de trabajo del operador de ventanilla, que ejecuta el artefacto `DashboardApp`. Conectada vía **TCP** a la capa de negocio.
+- **Pantalla Central** (`<<Device>>`): Dispositivo de visualización pública que ejecuta el artefacto `VisorTurnos`, recibiendo actualizaciones en tiempo real vía **TCP**.
+- **Dispositivo Remoto** (`<<Device>>`): Representa a los usuarios externos que acceden al sistema a través de un `Navegador Web` mediante el protocolo seguro **HTTPS**, asegurando la confidencialidad de la comunicación.
+
+---
+
+#### Nodo Servidor Central — Capa de Negocio
+
+Es el entorno de ejecución principal del sistema (`<<Execution Environment>>`). Alberga dos componentes fundamentales que materializan los patrones de diseño aplicados:
+
+- **Core Tunomático — `GestorTurnosServices` (`<<Component>>`)**:
+  Al ubicar este componente en un servidor central único, se respalda físicamente el patrón **Singleton**. Todas las peticiones concurrentes — ya sean de clientes físicos, clientes remotos u operadores — convergen hacia una única instancia del servicio, eliminando el riesgo de duplicidad de tickets y garantizando la consistencia de la cola en memoria.
+
+- **Módulo Integración — `NotificadorAdapter` (`<<Component>>`)**:
+  Se despliega como un componente aislado dentro del mismo servidor, separado lógicamente del Core. Esta decisión de despliegue materializa el patrón **Adapter**, protegiendo al núcleo del sistema de posibles fallos de red, cambios de contrato o actualizaciones de la API externa. La comunicación entre ambos componentes es interna al servidor, lo que minimiza la latencia.
+
+---
+
+#### Nodo de Persistencia — Base de Datos
+
+Un `<<Database Server>>` independiente aloja la base de datos `DB_Tunomatico`. La separación física del servidor de aplicaciones responde a una decisión deliberada de escalabilidad independiente: permite escalar el almacenamiento sin afectar la capa de negocio, y viceversa. La comunicación se realiza vía **TCP**, garantizando el registro persistente de auditorías, métricas de rendimiento y reportes históricos.
+
+---
+
+#### Nodo Externo — Proveedor Cloud
+
+Representa la infraestructura de terceros. El sistema se comunica exclusivamente con la `<<ExternalSystem>> API Externa` mediante peticiones **HTTPS** originadas desde el `NotificadorAdapter`. El uso de HTTPS en esta comunicación responde a una exigencia de seguridad para el transporte de datos de usuarios (correos, tokens de notificación). El bajo acoplamiento garantizado por el Adapter implica que este nodo externo puede ser sustituido sin modificar la arquitectura interna del sistema.
+
+---
