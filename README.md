@@ -28,7 +28,7 @@ El sistema considera los aspectos operacionales críticos de un entorno de atenc
 
 ## 🔹 1. Diagrama de Casos de Uso UML
 
-![Diagrama de Casos de Uso](Diagramas/caso_de_uso.png)
+(Diagramas/Caso_de_uso.png)
 
 ### Descripción General
 
